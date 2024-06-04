@@ -1,0 +1,54 @@
+ const Options = ({ children }) => {
+    const { me, callAccepted, name, setName, callEnded, leaveCall, callUser } = useContext(SocketContext);    //things we need from socketcontext
+    const [idToCall, setIdToCall] = useState('');           //setting a useState field for setting and calling other user's id
+    const classes = useStyles();                           // for using the various styles
+  
+    return (
+      <Container className={classes.container}>
+       <Paper elevation={10} className={classes.paper}>                     {/* elevation will make it look elevated  */}
+          <form className={classes.root} noValidate autoComplete="off">              {/*we are creating a form */}
+            <Grid container className={classes.gridContainer}>
+              <Grid item xs={12} md={6} className={classes.padding}>
+                <Typography gutterBottom variant="h6">Account Info</Typography>            {/*Account info will be the header */}
+                <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth />      {/*  check 88 - 89 line */}
+                <CopyToClipboard text={me} className={classes.margin}>                                            {/* IT WILL ACCEPT THE ID OF MY SOCKET */}
+                  <Button variant="contained" color="primary" fullWidth startIcon={<Assignment fontSize="large" />}>          {/*creating a button which is also going to have a icon on it */}
+                    Copy Your ID                                 {/*  write the id you want to call */}
+                  </Button>
+                </CopyToClipboard>
+              </Grid>
+
+              {/* Now we are going to have another Grid for making a call */}
+              <Grid item xs={12} md={6} className={classes.padding}>
+                <Typography gutterBottom variant="h6">Make a call</Typography>         {/*  it will gave a msg Make a Call */}
+                <TextField label="ID to call" value={idToCall} onChange={(e) => setIdToCall(e.target.value)} fullWidth />       {/* this will set the value to the idToCall that we write */}
+
+                 {/* creating a button but it will depend on are we in a call right now or we are not...*/}
+                {callAccepted && !callEnded ? (                   //we are making a jsx if this will be the condition
+                  <Button variant="contained" color="secondary" startIcon={<PhoneDisabled fontSize="large" />} fullWidth onClick={leaveCall} className={classes.margin}>    {/* check line 94 - 95 */}
+                    Hang Up                           {/*  when we were on call we get button option to hang up the call ...it will be only visible when we are on a call for hanging up */}
+                  </Button>
+                ) : (                                // and if the above condition is false...for that we make another jsx
+                  <Button variant="contained" color="primary" startIcon={<Phone fontSize="large" />} fullWidth onClick={() => callUser(idToCall)} className={classes.margin}>       {/* check line 97 - 98 */}
+                    Call                             {/*  when we were not on a call we get button option to call ...it will be only visible when we are not on a call for calling */}
+                  </Button>
+                )}
+              </Grid>
+            </Grid>
+          </form>
+     {children}                                    {/*   children make the notification component show inside option components as a sub component  */}
+        </Paper>                   
+      </Container>          
+    );
+  };
+  
+  export default Options;
+
+  // LINE 58...  we are making a textfield whic is going to have info like name and onchange is a
+  // handler which has a call back function event(e) and then the setname will set the value of our name as we type it 
+
+  //  LINE 72... leaveCall function is created in socket context so we are calling it here
+   //  so that we can leave the call when the hangup button is pressed
+
+ //  LINE 76... callUser function is created in socket context so we are calling it here
+  //  so that we can call the user whose id is passed in it when thes button is pressed

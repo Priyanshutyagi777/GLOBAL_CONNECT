@@ -52,3 +52,35 @@
 
  //  LINE 76... callUser function is created in socket context so we are calling it here
   //  so that we can call the user whose id is passed in it when thes button is pressed
+
+
+
+NOTIFICATIONS.............................
+
+import React, { useContext } from 'react';
+import { Button } from '@material-ui/core';
+
+import { SocketContext } from '../SocketContext';
+
+// NOTIFICATION WILL ONLY BE VISIBLE HEN WE ARE GETTING A CALL AS A TEMPORARY OPTION
+const Notifications = () => {
+  const { answerCall, call, callAccepted } = useContext(SocketContext);      // using comtext that we need from socketCntext
+
+  return (
+    <>
+      {call.isReceivingCall && !callAccepted && (                 //  check line 25
+        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+          <h1>{call.name} is calling: </h1>
+          <Button variant="contained" color="primary" onClick={answerCall}>  
+             Answer      {/* answer button that will be visible when call is coming so that we can answer the call */}
+          </Button>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Notifications;
+
+// LINE 11....if the call is receving(call is coming) and that call is not accepted yet
+// then it will display the name of the caller which is calling

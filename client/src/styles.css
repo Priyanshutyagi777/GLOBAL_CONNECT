@@ -1,0 +1,21 @@
+body {
+    background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.3), 
+      rgba(0, 0, 0, 0.3)
+    ),
+    url(https://i.pinimg.com/originals/8f/14/57/8f14578ef69a4c53352955d1e072eda6.png);   /* BACKGROUND IMAGE */
+    background-attachment: fixed;
+    background-size: cover;
+    color: rgb(105, 104, 104)
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* https://i.pinimg.com/originals/8f/14/57/8f14578ef69a4c53352955d1e072eda6.png */
+/* https://as2.ftcdn.net/v2/jpg/05/95/40/03/1000_F_595400389_FhxCseqE64pOAeS1JFz5AVCThbExP15H.jpg */
+/* https://png.pngtree.com/background/20230525/original/pngtree-waves-of-colorful-light-on-a-dark-background-picture-image_2736878.jpg */
+/* https://img.myloview.com/posters/simple-minimal-3d-dark-blue-abstract-business-presentation-background-with-light-stripes-and-overlap-layers-abstract-gemoetric-pattern-luxury-dark-blue-background-700-260266438.jpg */
